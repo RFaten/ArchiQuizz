@@ -26,6 +26,10 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
+        // Create BackButton on the ActionBar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Get the value entered in edit text from MainActivity
         nameText = getIntent().getStringExtra("name_value");
         //Get the value of calculated score from MainActivity
@@ -56,7 +60,23 @@ public class ResultsActivity extends AppCompatActivity {
 
     }
 
-    // Override onBackPressed method to reset the app when the user go back to MainActivity
+
+    // Make the BackButton goes to MainActivity and resets the quiz
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == android.R.id.home){
+            this.finish();
+        }
+        super.onBackPressed();
+        Intent intent = new Intent(ResultsActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Override onBackPressed method to reset the quiz when the user go back to MainActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
