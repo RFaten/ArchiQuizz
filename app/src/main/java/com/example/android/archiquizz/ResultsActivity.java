@@ -25,20 +25,27 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-        //ActionBar ab = getActionBar();
-        //ab.setDisplayHomeAsUpEnabled(true);
 
+        //Get the value entered in edit text from MainActivity
         nameText = getIntent().getStringExtra("name_value");
+        //Get the value of calculated score from MainActivity
         score = getIntent().getExtras().getInt("score_value");
 
+        // Get the welcome message string
         String welcomeMessage = getString(R.string.finish_quiz_welcome_message, nameText);
+        // Find the view to display welcome message on
         TextView welcomeMessageTextView = (TextView) findViewById(R.id.welcome_message);
+        // Set the welcome message text on that view
         welcomeMessageTextView.setText(welcomeMessage);
 
+        // Find the view to display score on
         TextView scoreTextView = (TextView) findViewById(R.id.score);
+        // Set the score value on that view
         scoreTextView.setText(String.valueOf(score));
 
+        // Find the view to display score message on
         TextView scoreMessageTextView = (TextView) findViewById(R.id.score_message);
+        // Define the score message based on score value
         if (score >= 8) {
             scoreMessageTextView.setText(R.string.score_message_1);
         } else if (score < 5) {
@@ -49,6 +56,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     }
 
+    // Override onBackPressed method to reset the app when the user go back to MainActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -57,13 +65,19 @@ public class ResultsActivity extends AppCompatActivity {
         finish();
     }
 
+    // The share button method
     public void shareScore(View view) {
+        // Make the user choose an app to share their score
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
+        // Define the subject to share
         String subject = getString(R.string.subject);
+        // Define the message to share
         String shareBody = getString(R.string.share_body, nameText, score);
+        // Send the message and subject to the selected app
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        // Display the share message and subject on the selected app
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 }

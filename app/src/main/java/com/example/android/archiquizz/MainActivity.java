@@ -24,10 +24,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    // The submit button method
     public void checkForRightAnswers(View view) {
 
+        // Get the value entered in edit text
         EditText nameEditText = (EditText) findViewById(R.id.name);
+        // Store that value in a string
         nameText = nameEditText.getText().toString();
+        // Get the views of radio buttons
         RadioGroup question1 = (RadioGroup) findViewById(R.id.q1_answers);
         RadioGroup question2 = (RadioGroup) findViewById(R.id.q2_answers);
         RadioGroup question3 = (RadioGroup) findViewById(R.id.q3_answers);
@@ -37,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
         RadioGroup question8 = (RadioGroup) findViewById(R.id.q8_answers);
         RadioGroup question9 = (RadioGroup) findViewById(R.id.q9_answers);
         RadioGroup question10 = (RadioGroup) findViewById(R.id.q10_answers);
+        // Get the views of check boxes
         CheckBox question6Option1 = (CheckBox) findViewById(R.id.q6_op1);
         CheckBox question6Option2 = (CheckBox) findViewById(R.id.q6_op2);
         CheckBox question6Option3 = (CheckBox) findViewById(R.id.q6_op3);
 
+        // check whether the user answered all the questions and entered his name or not
         if (question1.getCheckedRadioButtonId() == -1) {
             Toast.makeText(getApplicationContext(), R.string.complete_quiz_toast, Toast.LENGTH_SHORT).show();
         } else if (question2.getCheckedRadioButtonId() == -1) {
@@ -63,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), R.string.complete_quiz_toast, Toast.LENGTH_SHORT).show();
         } else if (nameText.matches("")) {
             Toast.makeText(getApplicationContext(), R.string.enter_your_name_toast, Toast.LENGTH_SHORT).show();
+            // Check user answer and if it was right add 1 to the score
         } else {
             int selectedIdQ1 = question1.getCheckedRadioButtonId();
             RadioButton selectedRadioButtonQ1 = (RadioButton) findViewById(selectedIdQ1);
@@ -131,9 +138,12 @@ public class MainActivity extends AppCompatActivity {
                 score = score + 1;
             }
 
+            // Create a new intent to send data and start a new activity
             Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
+            // Send the values of score and name to ResultActivity
             intent.putExtra("score_value", score);
             intent.putExtra("name_value", nameText);
+            // Start the ResultActivity
             MainActivity.this.startActivity(intent);
         }
     }
