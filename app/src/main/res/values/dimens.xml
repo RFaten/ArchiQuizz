@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="answers_width">160dp</dimen>
+    <dimen name="image_hight">200dp</dimen>
+    <dimen name="question_text_size">18sp</dimen>
+    <dimen name="answers_text_size">16sp</dimen>
+    <dimen name="main_margin">8dp</dimen>
+    <dimen name="q_title_text_size">14sp</dimen>
+    <dimen name="result_message_text_size">24sp</dimen>
+    <dimen name="score_text_size">56sp</dimen>
+</resources>
